@@ -22,7 +22,7 @@ DE:
 
 Vielen Dank das du unser Speedometer Script gedownloaded hast <3
 
-Für Support komm auf our Discord Server: https://discord.gg/7even
+Für Support komm auf unserem Discord Server: https://discord.gg/7even
 
 1. Füge unser Script in deine Serverdateien ein z.B. in einem Ressourcen Ordner.
 2. Schreibe in deine "server.cfg" 'start 7even_speedo' oder 'ensure 7even_speedo' (Ohne die '')

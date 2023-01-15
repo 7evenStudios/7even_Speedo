@@ -3,7 +3,22 @@ local speedBuffer = {}
 local velBuffer = {}
 local SeatbeltON = false
 local InVehicle = false
-local togglekeys = 120
+ 
+
+
+RegisterKeyMapping('seatbelt', 'Toggle Seatbelt', 'keyboard', 'X')
+RegisterCommand("seatbelt", function()
+    SeatbeltON = not SeatbeltON
+    if SeatbeltON then
+        Citizen.Wait(1)
+        TriggerEvent('seatbelt:client:ToggleSeatbelt', SeatbeltON)
+        isUiOpen = true
+    else
+        TriggerEvent('seatbelt:client:ToggleSeatbelt', SeatbeltON)
+        isUiOpen = true
+    end
+end)
+
 function IsCar(veh)
     local vc = GetVehicleClass(veh)
     return (vc >= 0 and vc <= 7) or (vc >= 9 and vc <= 12) or (vc >= 17 and vc <= 20)
@@ -16,6 +31,7 @@ function Fwv(entity)
     return { x = math.cos(hr) * 2.0, y = math.sin(hr) * 2.0 }
 end
 
+ 
 Citizen.CreateThread(function()
     local timer = 1000
     while true do
@@ -45,17 +61,6 @@ Citizen.CreateThread(function()
                 SetEntityVelocity(ped, velBuffer.x, velBuffer.y, velBuffer.z)
                 Citizen.Wait(1)
                 SetPedToRagdoll(ped, 1000, 1000, 0, 0, 0, 0)
-            end
-            if IsControlJustReleased(0, togglekeys) and GetLastInputMethod(0) then
-                SeatbeltON = not SeatbeltON
-                if SeatbeltON then
-                    Citizen.Wait(1)
-                    TriggerEvent('seatbelt:client:ToggleSeatbelt', SeatbeltON)
-                    isUiOpen = true
-                else
-                    TriggerEvent('seatbelt:client:ToggleSeatbelt', SeatbeltON)
-                    isUiOpen = true
-                end
             end
         elseif InVehicle then
             InVehicle = false

@@ -10,10 +10,16 @@ RegisterCommand("speedo", function()
     end
 
 end)
+
+
+
 RegisterNetEvent('seatbelt:client:ToggleSeatbelt')
 AddEventHandler('seatbelt:client:ToggleSeatbelt', function(state)
     belts = state
 end)
+
+
+ 
 
 
 Citizen.CreateThread(function()
@@ -21,7 +27,7 @@ Citizen.CreateThread(function()
     while true do
         Citizen.Wait(timer)
         local veh = GetVehiclePedIsIn(GetPlayerPed(-1), false)
-        --SetVehicleEngineOn(veh, true, true, true)
+        SetVehicleEngineOn(veh, true, true, true)
         if veh ~= 0 and GetIsVehicleEngineRunning(veh) == 1 then
             timer = 100
             if GetPedInVehicleSeat(veh, -1) == GetPlayerPed(-1) or visible == true then
